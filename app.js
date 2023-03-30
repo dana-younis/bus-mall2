@@ -1,4 +1,4 @@
-"use strict";
+"use allItemict";
 let first = document.getElementById("firstImg");
 let second = document.getElementById("secondImg");
 let third = document.getElementById("thirdImg");
@@ -6,15 +6,18 @@ let firstIndex;
 let secondIndex;
 let thirdIndex;
 let tries = 5;
+let votesArr = [];
+let shownArr = [];
 Render.allImgs = [];
 let count = 0;
-
+let namesArr = [];
 function Render(name, path) {
     this.name = name;
     this.path = path;
     this.votes = 0;
     this.shown = 0;
     Render.allImgs.push(this);
+    namesArr.push(this.name);
 }
 
 new Render("bag", "img/bag.jpg");
@@ -41,25 +44,41 @@ new Render("wine-glass", "img/wine-glass.jpg");
 function random() {
     return Math.floor(Math.random() * Render.allImgs.length);
 }
+let allItem=[];
 function generates() {
     firstIndex = random();
     secondIndex = random();
     thirdIndex = random();
 
-    while (
-        firstIndex === secondIndex ||
-        firstIndex === thirdIndex ||
-        secondIndex === thirdIndex
-    ) {
-        firstIndex = random();
+    // while (
+    //     firstIndex === secondIndex ||
+    //     firstIndex === thirdIndex ||
+    //     secondIndex === thirdIndex
+    // ) {
+    //     firstIndex = random();
+    //     secondIndex = random();
+    // }
+    while (firstIndex === thirdIndex || secondIndex === firstIndex || thirdIndex === secondIndex || allItem.includes(firstIndex) || allItem.includes(thirdIndex) || allItem.includes(secondIndex)) {
+        
+
+
+        thirdIndex = random();
         secondIndex = random();
+        firstIndex = random();
+        
     }
+    console.log(allItem);
     first.setAttribute('src', Render.allImgs[firstIndex].path);
     second.setAttribute("src", Render.allImgs[secondIndex].path);
     third.setAttribute("src", Render.allImgs[thirdIndex].path);
     Render.allImgs[firstIndex].shown++;
     Render.allImgs[secondIndex].shown++;
     Render.allImgs[thirdIndex].shown++;
+   
+    allItem = [firstIndex, thirdIndex, secondIndex];
+    
+    
+      
 }
 console.log(Render.allImgs);
 
@@ -83,11 +102,15 @@ function listenerFun(event) {
         buttons.appendChild(button)
         button.addEventListener('click', showing);
 
-
+        for (let i = 0; i < Render.allImgs.length; i++) {
+            votesArr.push(Render.allImgs[i].votes);
+            shownArr.push(Render.allImgs[i].shown);
+      
+          }
         first.removeEventListener('click', listenerFun)
         second.removeEventListener('click', listenerFun)
         third.removeEventListener('click', listenerFun)
-
+        chart();
 
 
 
@@ -114,5 +137,44 @@ function showing() {
     
     button.hidden = true;
 }
-
+function chart() {
+    let ctx = document.getElementById('myChart').getContext('2d');
+  
+    let chart = new Chart(ctx, {
+      // what type is the chart
+      type: 'bar',
+  
+      //  the data for showing
+      data: {
+        //  for the names
+        labels: namesArr,
+  
+        datasets: [
+          {
+            label: 'votes',
+            data: votesArr,
+            backgroundColor: [
+              'pink',
+            ],
+  
+            borderWidth: 0.5
+          },
+  
+          {
+            label: 'Shown',
+            data: shownArr,
+            backgroundColor: [
+              'barbel',
+            ],
+  
+            borderWidth: 0.5
+          }
+  
+        ]
+      },
+      options: {}
+    });
+  
+  }
+  
 generates();
