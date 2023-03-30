@@ -7,7 +7,7 @@ img{
 }
 
 header{
-   background-color:#ce6a6b; 
+   background-color:#f5cdce; 
    font-size: 50px;
    text-align: center;
   
@@ -23,10 +23,10 @@ header{
 }
 
 main{
-   background-color: #ebaca2d7;
+   background-color: #e9d9d7d7;
 }
 footer{
-   background-color: #ce6a6b;
+   background-color: #e7c6c7;
 }
 
 button {
