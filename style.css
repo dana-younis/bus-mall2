@@ -1,0 +1,43 @@
+*{padding: 0; margin: 0;
+    box-sizing: border-box;}
+img{
+   width: 20%;
+   height: 20%;
+
+}
+
+header{
+   background-color:#ce6a6b; 
+   font-size: 50px;
+   text-align: center;
+  
+      
+       width: 100%;
+       height: auto;
+       background-size: cover;
+     
+       
+       overflow: hidden;
+      
+  
+}
+
+main{
+   background-color: #ebaca2d7;
+}
+footer{
+   background-color: #ce6a6b;
+}
+
+button {
+   background-color: #212e53;
+   
+   color: white;
+   padding: 15px 32px;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 16px;
+   margin: 4px 2px;
+   cursor: pointer;
+ }
